@@ -5,12 +5,11 @@ databaseChangeLog:
       author: shalera
       changes:
         - createTable:
-            tableName: MeterRecords
+            tableName: "meter_records"
             columns:
               - column:
-                  name: meterId
+                  name: meter_id
                   type: BIGINT
-                  autoIncrement: true
                   constraints:
                     primaryKey: true
                     nullable: false
@@ -20,7 +19,7 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: meterGroup
+                  name: meter_group
                   type: varchar
                   constraints:
                     nullable: false
@@ -30,7 +29,52 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: currentReading
+                  name: current_reading
                   type: double precision
                   constraints:
                     nullable: false
+  - changeSet:
+      id: 2
+      author: shalera
+      comment: "Test data"
+      changes:
+        - insert:
+            tableName: "meter_records"
+            columns:
+              - column:
+                  name: meter_id
+                  value: 123
+              - column:
+                  name: type
+                  value: "ELM777"
+              - column:
+                  name: meter_group
+                  value: "room1"
+              - column:
+                  name: timestamp
+                  value: "2022.10.10"
+              - column:
+                  name: current_reading
+                  value: 125.67
+        - insert:
+            tableName: "meter_records"
+            columns:
+              - column:
+                  name: meter_id
+                  value: 325
+              - column:
+                  name: type
+                  value: "MT555"
+              - column:
+                  name: meter_group
+                  value: "room2"
+              - column:
+                  name: timestamp
+                  value: "2022.10.11"
+              - column:
+                  name: current_reading
+                  value: 324.37
+      rollback:
+        - delete:
+            tableName: "meter_records"
+            where: type in ('ELM777', 'MT555')

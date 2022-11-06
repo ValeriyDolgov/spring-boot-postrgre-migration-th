@@ -15,18 +15,21 @@
     <table class="table table-striped table-responsive-md table-bordered">
         <thead>
         <tr>
-            <th> Имя статьи</th>
-            <th> Текст статьи</th>
+            <th> meterId</th>
+            <th> type</th>
+            <th> meterGroup</th>
+            <th> timestamp</th>
+            <th> currentReading</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="record : ${listOfRecords}">
-            <td th:text="${record.meterId}"></td>
-            <td th:text="${record.type}"></td>
-            <td th:text="${record.meterGroup}"></td>
-            <td th:text="${record.timestamp}"></td>
-            <td th:text="${record.currentReading}"></td>
-        </tr>
+            <tr th:each="record : ${listOfAllRecords}">
+                <td th:text="${record.meterId}"></td>
+                <td th:text="${record.type}"></td>
+                <td th:text="${record.meterGroup}"></td>
+                <td th:text="${record.timestamp}"></td>
+                <td th:text="${record.currentReading}"></td>
+            </tr>
         </tbody>
     </table>
 </div>
