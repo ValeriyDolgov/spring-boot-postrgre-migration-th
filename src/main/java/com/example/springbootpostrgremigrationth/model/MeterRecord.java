@@ -1,6 +1,6 @@
 package com.example.springbootpostrgremigrationth.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -8,12 +8,14 @@ import java.sql.Timestamp;
 //На основании названия класса создает новубю таблицу
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString
 @Table(name = "meter_records")
 public class MeterRecord {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "meter_id")
     private long meterId;
 
@@ -29,4 +31,14 @@ public class MeterRecord {
     @Column(name = "current_reading", nullable = false)
     private double currentReading;
 
+    public MeterRecord() {
+    }
+
+    public MeterRecord(long meterId, String type, String meterGroup, Timestamp timestamp, double currentReading) {
+        this.meterId = meterId;
+        this.type = type;
+        this.meterGroup = meterGroup;
+        this.timestamp = timestamp;
+        this.currentReading = currentReading;
+    }
 }

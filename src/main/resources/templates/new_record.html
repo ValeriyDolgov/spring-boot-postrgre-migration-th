@@ -16,11 +16,11 @@
     <h2 class="mb-4"> Добавить пользователя </h2>
     <form action="#" th:action="@{/saveRecord}" th:object="${record}" method="POST">
         <!--        <input type="text" th:field="*{id}" placeholder="Введите идентификационный номер статьи" class="form-control mb-4 col-4"/>-->
-        <input type="number" th:field="*{meterId}" placeholder="Введите название статьи" class="form-control mb-4 col-4"/>
-        <input type="text" th:field="*{type}" placeholder="Введите название статьи" class="form-control mb-4 col-4"/>
-        <input type="number" th:field="*{meterGroup}" placeholder="Введите название статьи" class="form-control mb-4 col-4"/>
-        <input type="date" th:field="*{timestamp}" placeholder="Введите название статьи" class="form-control mb-4 col-4"/>
-        <input type="number" th:field="*{currentReading}" placeholder="Введите название статьи" class="form-control mb-4 col-4"/>
+        <input type="number" th:field="*{meterId}" placeholder="ID счетчика" class="form-control mb-4 col-4"/>
+        <input type="text" th:field="*{type}" placeholder="Тип счетчика(пример: ELM777)" class="form-control mb-4 col-4"/>
+        <input type="text" th:field="*{meterGroup}" placeholder="Группа счетчика(пример: room1)" class="form-control mb-4 col-4"/>
+        <input type="text" th:field="*{timestamp}" placeholder="Дата замера yyyy-mm-dd hh:mm:ss" class="form-control mb-4 col-4"/>
+        <input type="text" th:field="*{currentReading}" placeholder="Текущий замер" class="form-control mb-4 col-4"/>
 
 
         <button type="submit" class="btn btn-info col-2.5">Сохранить статью</button>
