@@ -1,12 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Стартовая страница</title>
+    <title>Записи счетчиков</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
 </head>
 <body>
-    <a>Входная страница</a>
-    <a th:href="@{/authenticated/allRecords}" class="btn btn-primary btn-sm mb-3"> Посмотреть все записи</a>
-
+<div class="container">
+    <h1> Здравствуйте! Вы попали на сайт по простотру и регистрации показателей счетчиков какой то компании! </h1>
+    <p align="right">[[${#httpServletRequest.remoteUser}]]</p>
+    <a th:if="${#httpServletRequest.remoteUser == null}"><a th:href="@{/authenticated/adminPanel}"
+                                                              class="btn btn-primary btn-sm mb-3"> Авторизоваться</a></a>
+    <a th:unless="${#httpServletRequest.remoteUser == null}"><a th:href="@{/authenticated/adminPanel}"
+                                                            class="btn btn-primary btn-sm mb-3"> Вернуться на главную страницу</a></a>
+</div>
 </body>
 </html>

@@ -14,7 +14,7 @@
     <h1> Система управления пользвателями </h1>
     <hr>
     <h2 class="mb-4"> Добавить пользователя </h2>
-    <form action="#" th:action="@{/saveRecord}" th:object="${record}" method="POST">
+    <form action="#" th:action="@{/authenticated/saveRecord}" th:object="${record}" method="POST">
         <!--        <input type="text" th:field="*{id}" placeholder="Введите идентификационный номер статьи" class="form-control mb-4 col-4"/>-->
         <input type="number" th:field="*{meterId}" placeholder="ID счетчика" class="form-control mb-4 col-4"/>
         <input type="text" th:field="*{type}" placeholder="Тип счетчика(пример: ELM777)" class="form-control mb-4 col-4"/>
@@ -25,7 +25,7 @@
 
         <button type="submit" class="btn btn-info col-2.5">Сохранить статью</button>
     </form>
-    <a th:href="@{/}" class="btn btn-danger mt-4 col-2.5"> Вернуться на главную страницу </a>
+    <a th:href="@{/authenticated/adminPanel}" class="btn btn-danger mt-4 col-2.5"> Вернуться на главную страницу </a>
 </div>
 
 </body>

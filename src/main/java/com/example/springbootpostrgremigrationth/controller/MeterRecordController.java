@@ -22,20 +22,25 @@ public class MeterRecordController {
         return "index";
     }
 
+    @GetMapping("/authenticated/adminPanel")
+    public String showAdminPanel(){
+        return "admin_panel";
+    }
+
     @GetMapping("/authenticated/allRecords")
     public String showAllRecords(Model model) {
         model.addAttribute("listOfAllRecords", service.findAllMeterRecords());
         return "all_records";
     }
 
-    @GetMapping("/showNewForm")
+    @GetMapping("/authenticated/showNewForm")
     public String newRecord(Model model) {
         MeterRecord record = new MeterRecord();
         model.addAttribute("record", record);
         return "new_record";
     }
 
-    @PostMapping("/saveRecord")
+    @PostMapping("/authenticated/saveRecord")
     public String saveNewRecord(@ModelAttribute("record") MeterRecord record) {
         service.saveMeterRecord(record);
         return "redirect:/";

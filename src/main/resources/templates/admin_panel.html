@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Записи счетчиков</title>
+
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h1> Приветсвую вас, [[${#httpServletRequest.remoteUser}]]! Теперь вам доступен весь функционал сайта</h1>
+    <a th:href="@{/authenticated/allRecords}" class="btn btn-primary btn-sm mb-3"> Посмотреть все записи</a>
+    <a th:href="@{/authenticated/showNewForm}" class="btn btn-primary btn-sm mb-3"> Добавить новую запись</a>
+    <a th:href="@{/logout}" class="btn btn-danger mt-4 col-2.5"> Выйти из профиля</a>
+
+</div>
+</body>
+</html>
