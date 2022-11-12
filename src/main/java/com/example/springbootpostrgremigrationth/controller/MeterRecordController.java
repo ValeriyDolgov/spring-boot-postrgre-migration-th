@@ -18,9 +18,14 @@ public class MeterRecordController {
     }
 
     @GetMapping("/")
-    public String homePage(Model model) {
-        model.addAttribute("listOfAllRecords", service.findAllMeterRecords());
+    public String homePage(){
         return "index";
+    }
+
+    @GetMapping("/authenticated/allRecords")
+    public String showAllRecords(Model model) {
+        model.addAttribute("listOfAllRecords", service.findAllMeterRecords());
+        return "all_records";
     }
 
     @GetMapping("/showNewForm")
