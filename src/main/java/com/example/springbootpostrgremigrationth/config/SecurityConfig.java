@@ -8,6 +8,9 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+
+import javax.sql.DataSource;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -15,6 +18,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/authenticated/**").authenticated()
+                .antMatchers("/onlyAdmin/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
 //                .successForwardUrl("/authenticated/adminPanel")
@@ -22,8 +26,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout().logoutSuccessUrl("/");
     }
 
-    @Bean
-    public UserDetailsService users() {
+//    @Bean//in memory
+//    public UserDetailsService users() {
+//        UserDetails admin = User.builder()
+//                .username("site_admin")
+//                .password("{bcrypt}$2a$12$rju313pqH9J3fxe7pJPhEeNM9d1/mJ65WZoGwL2dA.AcJQjG9BNcS")//site_admin
+//                .roles("ADMIN", "USER")
+//                .build();
+//        UserDetails user = User.builder()
+//                .username("user")
+//                .password("{bcrypt}$2a$12$FvvNvORnfB8W6OPu7DPm/.n.XiK3UNiXwDq5S3sz8wVhs2mEV6WGO")//user
+//                .roles("USER")
+//                .build();
+//        return new InMemoryUserDetailsManager(admin, user);
+//    }
+
+    @Bean//in db
+    public JdbcUserDetailsManager users(DataSource dataSource){
         UserDetails admin = User.builder()
                 .username("site_admin")
                 .password("{bcrypt}$2a$12$rju313pqH9J3fxe7pJPhEeNM9d1/mJ65WZoGwL2dA.AcJQjG9BNcS")//site_admin
@@ -34,6 +53,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .password("{bcrypt}$2a$12$FvvNvORnfB8W6OPu7DPm/.n.XiK3UNiXwDq5S3sz8wVhs2mEV6WGO")//user
                 .roles("USER")
                 .build();
-        return new InMemoryUserDetailsManager(admin, user);
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        if(jdbcUserDetailsManager.userExists(admin.getUsername())){
+            jdbcUserDetailsManager.deleteUser(admin.getUsername());
+        }
+        if(jdbcUserDetailsManager.userExists(user.getUsername())){
+            jdbcUserDetailsManager.deleteUser(user.getUsername());
+        }
+        jdbcUserDetailsManager.createUser(admin);
+        jdbcUserDetailsManager.createUser(user);
+        return jdbcUserDetailsManager;
     }
+    //ByDao
+
 }

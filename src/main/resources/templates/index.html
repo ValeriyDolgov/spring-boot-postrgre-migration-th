@@ -13,10 +13,13 @@
 <div class="container">
     <h1> Здравствуйте! Вы попали на сайт по простотру и регистрации показателей счетчиков какой то компании! </h1>
     <p align="right">[[${#httpServletRequest.remoteUser}]]</p>
-    <a th:if="${#httpServletRequest.remoteUser == null}"><a th:href="@{/authenticated/adminPanel}"
+    <a th:if="${#httpServletRequest.remoteUser == null}"><a th:href="@{/authenticated/testAdminPanel}"
                                                               class="btn btn-primary btn-sm mb-3"> Авторизоваться</a></a>
-    <a th:unless="${#httpServletRequest.remoteUser == null}"><a th:href="@{/authenticated/adminPanel}"
+    <a th:unless="${#httpServletRequest.remoteUser == null}"><a th:href="@{/authenticated/testAdminPanel}"
                                                             class="btn btn-primary btn-sm mb-3"> Вернуться на главную страницу</a></a>
+    <p></p>
+    <a th:if="${#httpServletRequest.remoteUser == null}"><a th:href="@{/onlyAdmin}"
+                                                            class="btn btn-primary btn-sm mb-3"> Авторизоваться с ролью админ</a></a>
 </div>
 </body>
 </html>

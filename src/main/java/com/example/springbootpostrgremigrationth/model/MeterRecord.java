@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
-@Table(name = "meter_records")
+@Table(name = "meter_records") //НЕ УДАЛЯТЬ
 public class MeterRecord {
 
     @Id

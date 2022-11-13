@@ -22,9 +22,14 @@ public class MeterRecordController {
         return "index";
     }
 
-    @GetMapping("/authenticated/adminPanel")
-    public String showAdminPanel(){
-        return "admin_panel";
+    @GetMapping("/authenticated/testAdminPanel")
+    public String showTestAdminPanel(){
+        return "test_admin_panel";
+    }
+
+    @GetMapping("/onlyAdmin")
+    public String showPageForOnlyRoleAdmin(){
+        return "page_for_admin_role";
     }
 
     @GetMapping("/authenticated/allRecords")
