@@ -2,11 +2,15 @@ package com.example.springbootpostrgremigrationth.controller;
 
 import com.example.springbootpostrgremigrationth.model.MeterRecord;
 import com.example.springbootpostrgremigrationth.service.MeterRecordService;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 public class MeterRecordController {
@@ -36,6 +40,15 @@ public class MeterRecordController {
     public String showAllRecords(Model model) {
         model.addAttribute("listOfAllRecords", service.findAllMeterRecords());
         return "all_records";
+    }
+
+    @SneakyThrows
+    @GetMapping("/authenticated/allRecordsByMonth") // один request param для нужного месяца, потом parse +1
+    public String showAllRecordsByMonth(Model model, @RequestParam(name = "start") int startDate){
+        List<MeterRecord> recordList = service.findMeterRecordsByMonth(startDate);
+        model.addAttribute("listOfRecordByMonth", recordList);
+        model.addAttribute("result", service.findCurrentRecordsSum(recordList));
+        return "records_by_month";
     }
 
     @GetMapping("/authenticated/showNewForm")

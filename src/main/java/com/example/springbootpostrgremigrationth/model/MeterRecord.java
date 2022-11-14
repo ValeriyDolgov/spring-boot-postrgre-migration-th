@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 @Table(name = "meter_records") //НЕ УДАЛЯТЬ
 public class MeterRecord {
 
@@ -30,15 +31,4 @@ public class MeterRecord {
 
     @Column(name = "current_reading", nullable = false)
     private double currentReading;
-
-    public MeterRecord() {
-    }
-
-    public MeterRecord(long meterId, String type, String meterGroup, Timestamp timestamp, double currentReading) {
-        this.meterId = meterId;
-        this.type = type;
-        this.meterGroup = meterGroup;
-        this.timestamp = timestamp;
-        this.currentReading = currentReading;
-    }
 }

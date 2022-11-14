@@ -15,6 +15,12 @@
     <a th:href="@{/authenticated/allRecords}" class="btn btn-primary btn-sm mb-3"> Посмотреть все записи</a>
     <a th:href="@{/authenticated/showNewForm}" class="btn btn-primary btn-sm mb-3"> Добавить новую запись</a>
     <a th:href="@{/logout}" class="btn btn-danger mt-4 col-2.5"> Выйти из профиля</a>
+    <form method="GET" th:action="@{/authenticated/allRecordsByMonth}">
+        <label>
+            <input class="form-control mb-4 col-10" name="start" type="text" placeholder="Введите отчетный месяц"/>
+        </label>
+        <button type="submit" class="btn btn-info col-2.5">Поиск</button>
+    </form>
 </div>
 </body>
 </html>

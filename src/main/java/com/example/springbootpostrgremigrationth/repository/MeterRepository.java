@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface MeterRepository extends JpaRepository<MeterRecord, Long> {
-    List<MeterRecord> findAllByTimestamp(Timestamp timestamp);
+    List<MeterRecord> findAllByTimestampBetween(Timestamp start, Timestamp end);
 }
