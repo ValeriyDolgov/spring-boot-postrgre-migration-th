@@ -3,6 +3,9 @@ package com.example.springbootpostrgremigrationth.model;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 //На основании названия класса создает новубю таблицу
@@ -21,14 +24,20 @@ public class MeterRecord {
     private long meterId;
 
     @Column(name = "type", nullable = false)
+    @NotBlank
+    @Size(min = 5, max = 255)
     private String type;
 
+    @NotBlank
+    @Size(min = 3, max = 255)
     @Column(name = "meter_group", nullable = false)
     private String meterGroup;
 
+    @NotNull
     @Column(name = "timestamp", nullable = false)
     private Timestamp timestamp;
 
+    @NotNull
     @Column(name = "current_reading", nullable = false)
     private double currentReading;
 }

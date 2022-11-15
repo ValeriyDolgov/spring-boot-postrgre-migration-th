@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -59,7 +60,7 @@ public class MeterRecordController {
     }
 
     @PostMapping("/authenticated/saveRecord")
-    public String saveNewRecord(@ModelAttribute("record") MeterRecord record) {
+    public String saveNewRecord(@ModelAttribute("record") @Valid MeterRecord record) {
         service.saveMeterRecord(record);
         return "redirect:/";
     }

@@ -52,12 +52,9 @@ public class MeterRecordServiceImpl implements MeterRecordService {
         if(startDate < 10){
              monthValueStart = "0" + startDate;
         } else monthValueStart = String.valueOf(startDate);
-        String monthValueEnd = String.valueOf(Integer.valueOf(monthValueStart + 1));
-        if(startDate == 12) {
-            monthValueEnd = "01";
-        }
+        // м.б. по циклу обходить все месяца
         String startString = "2022-" + monthValueStart + "-01 00:00:00";
-        String endString = "2022-" + monthValueEnd + "-01 00:00:00";
+        String endString = "2022-" + monthValueStart + "-30 00:00:00";
         Timestamp start = parseTimestamp(startString);
         Timestamp end = parseTimestamp(endString);
         return repo.findAllByTimestampBetween(start, end);
