@@ -2,11 +2,13 @@ package com.example.springbootpostrgremigrationth.service;
 
 import com.example.springbootpostrgremigrationth.constants.ProjectConstants;
 import com.example.springbootpostrgremigrationth.model.MeterRecord;
+import com.example.springbootpostrgremigrationth.model.MeterRecordsByMonths;
 import com.example.springbootpostrgremigrationth.repository.MeterRepository;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -46,17 +48,32 @@ public class MeterRecordServiceImpl implements MeterRecordService {
         return repo.findAll();
     }
 
-    @Override//здесь надо описать так, end = start + 1
+    @Override
     public List<MeterRecord> findMeterRecordsByMonth(int startDate) {
         String monthValueStart;
         if(startDate < 10){
              monthValueStart = "0" + startDate;
         } else monthValueStart = String.valueOf(startDate);
-        // м.б. по циклу обходить все месяца
         String startString = "2022-" + monthValueStart + "-01 00:00:00";
         String endString = "2022-" + monthValueStart + "-30 00:00:00";
         Timestamp start = parseTimestamp(startString);
         Timestamp end = parseTimestamp(endString);
         return repo.findAllByTimestampBetween(start, end);
+    }
+
+    @Override
+    public List<MeterRecordsByMonths> createListOfRecordsByMonths() {
+        List<MeterRecordsByMonths> listOfRecordsByMonths = new ArrayList<>();
+        MeterRecordsByMonths meterRecordsByMonths;
+        for (int i = 1; i <= 12; i++){
+            List<MeterRecord> listOfRecordByOneMonth = findMeterRecordsByMonth(i);
+            if(listOfRecordByOneMonth.size() != 0) {
+                meterRecordsByMonths = new MeterRecordsByMonths();
+                meterRecordsByMonths.setListOfRecords(listOfRecordByOneMonth);
+                meterRecordsByMonths.setSumOfReadings(findCurrentRecordsSum(listOfRecordByOneMonth));
+                listOfRecordsByMonths.add(meterRecordsByMonths);
+            }
+        }
+        return listOfRecordsByMonths;
     }
 }

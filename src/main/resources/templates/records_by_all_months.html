@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Поисковик на ElasticSearch</title>
+
+  <link rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+  <h1> Значения счетчиков по месяцам </h1>
+  <div class="container">
+
+  </div>
+  <table class="table table-striped table-responsive-md table-bordered">
+    <thead>
+<!--    <tr>-->
+<!--      <th> Месяц</th>-->
+<!--      <tr>-->
+<!--        <th> meterId</th>-->
+<!--        <th> type</th>-->
+<!--        <th> meterGroup</th>-->
+<!--        <th> timestamp</th>-->
+<!--        <th> currentReading</th>-->
+<!--      </tr>-->
+<!--    </tr>-->
+    </thead>
+    <tbody>
+      <tr th:each="records : ${listOfRecordByMonths}">
+        <td>
+          <p th:each="list : ${records.listOfRecords}">
+            <span th:text="${list.meterId}"/>
+            <span th:text="${list.type}"/>
+            <span th:text="${list.meterGroup}"/>
+            <span th:text="${list.timestamp}"/>
+            <span th:text="${list.currentReading}"/>
+          </p>
+        </td>
+        <td th:text="${records.sumOfReadings}"/>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

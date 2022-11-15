@@ -14,8 +14,9 @@
     <h1> Приветсвую вас, [[${#httpServletRequest.remoteUser}]]! Теперь вам доступен весь функционал сайта</h1>
     <a th:href="@{/authenticated/allRecords}" class="btn btn-primary btn-sm mb-3"> Посмотреть все записи</a>
     <a th:href="@{/authenticated/showNewForm}" class="btn btn-primary btn-sm mb-3"> Добавить новую запись</a>
+    <a th:href="@{/authenticated/allRecordsByAllMonths}" class="btn btn-primary btn-sm mb-3"> Посмотреть все записи по месяцам</a>
     <a th:href="@{/logout}" class="btn btn-danger mt-4 col-2.5"> Выйти из профиля</a>
-    <form method="GET" th:action="@{/authenticated/allRecordsByMonth}">
+    <form method="GET" th:action="@{/authenticated/allRecordsByOneMonth}">
         <label>
             <input class="form-control mb-4 col-10" name="start" type="text" placeholder="Введите отчетный месяц"/>
         </label>
