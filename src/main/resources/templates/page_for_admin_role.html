@@ -9,19 +9,19 @@
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
 </head>
-<body>
-<div class="container">
-    <h1> Приветсвую вас, [[${#httpServletRequest.remoteUser}]]! Теперь вам доступен весь функционал сайта</h1>
-    <a th:href="@{/authenticated/allRecords}" class="btn btn-primary btn-sm mb-3"> Посмотреть все записи</a>
-    <a th:href="@{/authenticated/showNewForm}" class="btn btn-primary btn-sm mb-3"> Добавить новую запись</a>
-    <a th:href="@{/authenticated/allRecordsByAllMonths}" class="btn btn-primary btn-sm mb-3"> Посмотреть все записи по месяцам</a>
-    <a th:href="@{/logout}" class="btn btn-danger mt-4 col-2.5"> Выйти из профиля</a>
-    <form method="GET" th:action="@{/authenticated/allRecordsByOneMonth}">
-        <label>
-            <input class="form-control mb-4 col-10" name="start" type="text" placeholder="Введите отчетный месяц"/>
-        </label>
-        <button type="submit" class="btn btn-info col-2.5">Поиск</button>
-    </form>
-</div>
-</body>
+    <body>
+        <div class="container">
+            <h1> Приветсвую вас, [[${#httpServletRequest.remoteUser}]]! Теперь вам доступен весь функционал сайта</h1>
+            <p></p>
+            <a th:href="@{/authenticated/allRecords}" class="btn btn-primary btn-sm mb-3"> Посмотреть все записи</a>
+            <a th:href="@{/authenticated/showNewForm}" class="btn btn-primary btn-sm mb-3"> Добавить новую запись</a>
+            <a th:href="@{/authenticated/allRecordsByAllMonths}" class="btn btn-primary btn-sm mb-3"> Посмотреть все записи по месяцам</a>
+            <p></p>
+            <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3"> Выйти из профиля</a>
+            <form method="GET" th:action="@{/authenticated/allRecordsByOneMonth}">
+                <input class="form-control mb-4 col-5" name="start" type="text" placeholder="Введите отчетный месяц в числовом формате"/>
+                <button type="submit" class="btn btn-info col-2.5">Поиск</button>
+            </form>
+        </div>
+    </body>
 </html>

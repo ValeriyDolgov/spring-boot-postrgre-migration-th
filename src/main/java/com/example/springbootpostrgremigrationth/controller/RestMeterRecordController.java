@@ -18,12 +18,6 @@ public class RestMeterRecordController {
         this.service = service;
     }
 
-
-//    @GetMapping("/authenticated/allRecords")
-//    public Iterable<MeterRecord> showAllRecords(Model model) {
-//        return service.findAllMeterRecords();
-//    }
-
     @GetMapping("/authenticated/allRecordsByOneMonth") // один request param для нужного месяца, потом parse +1
     public List<MeterRecord> showAllRecordsByOneMonth(@RequestParam(name = "start") int startDate){
         return service.findMeterRecordsByMonth(startDate);
@@ -38,5 +32,4 @@ public class RestMeterRecordController {
 //    public void saveNewRecord(@ModelAttribute("record") @Valid MeterRecord record) {
 //        service.saveMeterRecord(record);
 //    }
-
 }

@@ -4,6 +4,7 @@ import com.example.springbootpostrgremigrationth.constants.ProjectConstants;
 import com.example.springbootpostrgremigrationth.model.MeterRecord;
 import com.example.springbootpostrgremigrationth.model.MeterRecordsByMonths;
 import com.example.springbootpostrgremigrationth.repository.MeterRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -15,13 +16,14 @@ import java.util.List;
 @Service
 public class MeterRecordServiceImpl implements MeterRecordService {
 
-    private final MeterRepository repo;
+    private MeterRepository repo;
 
-    public MeterRecordServiceImpl(MeterRepository repo) {
+    @Autowired
+    public void setRepo(MeterRepository repo) {
         this.repo = repo;
     }
 
-    private Timestamp parseTimestamp(String timestamp){
+    public Timestamp parseTimestamp(String timestamp){
         try{
             return new Timestamp(ProjectConstants.TIMESTAMP_FORMAT.parse(timestamp).getTime());
         } catch (ParseException e){

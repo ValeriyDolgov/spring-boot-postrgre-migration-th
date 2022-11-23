@@ -5,7 +5,6 @@ import com.example.springbootpostrgremigrationth.model.MeterRecordsByMonths;
 
 import java.util.List;
 
-
 public interface MeterRecordService {
 
     void saveMeterRecord(MeterRecord meterRecord);

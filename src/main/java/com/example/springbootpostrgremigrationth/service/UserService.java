@@ -3,6 +3,7 @@ package com.example.springbootpostrgremigrationth.service;
 import com.example.springbootpostrgremigrationth.model.Role;
 import com.example.springbootpostrgremigrationth.model.User;
 import com.example.springbootpostrgremigrationth.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -20,8 +21,7 @@ public class UserService implements UserDetailsService, UserServiceInter {
 
     private UserRepository userRepository;
 
-    @Autowired
-    public void setUserRepository(UserRepository userRepository) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

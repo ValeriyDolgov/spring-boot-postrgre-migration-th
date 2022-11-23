@@ -68,7 +68,6 @@ public class MeterRecordController {
     @PostMapping("/authenticated/saveRecord")
     public String saveNewRecord(@ModelAttribute("record") @Valid MeterRecord record) {
         service.saveMeterRecord(record);
-        return "redirect:/";
+        return "redirect:/onlyAdmin";
     }
-
 }
